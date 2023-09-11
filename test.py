@@ -40,7 +40,7 @@ MAX_FFW = {
 def cli():
     parser = ArgumentParser()
     parser.add_argument('-s', '--seed', type=int, default=0)
-    parser.add_argument('-c', '--case', type=str, default='wcci', choices=['sand', 'wcci', '5'])
+    parser.add_argument('-c', '--case', type=str, default='5', choices=['sand', 'wcci', '5'])
     parser.add_argument('-gpu', '--gpuid', type=int, default=0)
 
     parser.add_argument('-ml', '--memlen', type=int, default=50000)
@@ -100,7 +100,7 @@ def seed_everything(seed_value):
     torch.manual_seed(seed_value)
     os.environ['PYTHONHASHSEED'] = str(seed_value)
     
-    if torch.cuda.is_available(): 
+    if torch.cuda.is_available():
         torch.cuda.manual_seed(seed_value)
         torch.cuda.manual_seed_all(seed_value)
         torch.backends.cudnn.deterministic = True

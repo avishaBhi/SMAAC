@@ -51,6 +51,7 @@ class Agent(BaseAgent):
         self.n_history = kwargs.get('n_history', 6)
         self.input_dim = self.converter.n_feature * self.n_history
         
+        # node_num is the topo_vect representing the bus all loads, generators, powerlines are connected to.
         print(f'N: {self.node_num}, O: {self.input_dim}, S: {self.state_dim}, A: {self.action_dim}, ({self.order_dim})')
         print(kwargs)
         self.emb = EncoderLayer(self.input_dim, self.state_dim, self.nheads, self.node_num, self.dropout).to(self.device)
@@ -182,6 +183,7 @@ class Agent(BaseAgent):
 
     def act(self, obs, reward, done):
         sample = (reward is None)
+        # see how observation is changed after the next command
         self.stack_obs(obs)
         is_safe = self.is_safe(obs)
         self.save = False        

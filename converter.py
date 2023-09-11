@@ -108,8 +108,12 @@ class graphGoalConverter:
 
         # current bus assignment
         topo_ = torch.clamp(o[..., self.topo] - 1, -1)
-
+        # state represents [[one node, rho of the powerline connected, if powerline is in danger, if overflowing, if in maintenance ], [...], ...]
         state = torch.stack([p_, rho_, danger_, over_, main_], dim=2) # B, N, F
+        print('State:')
+        print(state)
+        print('topo:')
+        print(topo_)
         return state, topo_.unsqueeze(-1)
   
     def init_action_converter(self):

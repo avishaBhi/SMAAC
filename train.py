@@ -83,7 +83,12 @@ class TrainAgent(object):
                     prev_act = act
                     break
             # just step if action is okay or failed to find other action
+            print('Before action is taken')
+            print(state)
+            # Make changes before this step?
             obs, rew, done, info = self.env.step(act)
+            print('After action is taken')
+            print(obs)
             reward += rew
             new_reward = info['rewards']['loss']
             train_reward += new_reward
